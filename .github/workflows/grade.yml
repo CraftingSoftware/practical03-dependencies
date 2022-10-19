@@ -1,0 +1,41 @@
+name: Grade
+on: [push, pull_request]
+
+jobs:
+  markdown:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@v4
+  spelling:
+    name: Check Spelling
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run cspell
+        uses: zwaldowski/cspell-action@v1
+        with:
+          paths: "**/*.md"
+          config: .github/cspell.json
+  gatorgrader:
+    runs-on: ubuntu-latest
+    name: Run GatorGrader
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v2.1.4
+        with:
+          poetry-version: 1.0.10
+      - name: Run GatorGradle
+        uses: GatorEducator/gatorgradle-action@v1
