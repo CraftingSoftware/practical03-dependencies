@@ -8,5 +8,4 @@ else:
     args = sys.argv[1:]
 numbers = list(map(int, args))
 numbers.sort(reverse = desc)
-for index, number in enumerate(numbers):
-    print(f'[{index}] {number}')
+print(numbers)

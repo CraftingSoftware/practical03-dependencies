@@ -1,0 +1,72 @@
+# check if the .toml file is created
+- pyproject.toml:
+    - description: Ensure that pyproject.toml file exists
+      check: ConfirmFileExists
+# check the technical writing for various characteristics
+- writing/reflection.md:
+    - description: Ensure that reflection.md file exists in the writing/ directory
+      check: ConfirmFileExists
+    - description: Write a minimum number of meaningful words (80) in the reflection
+      check: CountFileWords
+      options:
+        count: 80
+        exact: false
+    - description: Complete all TODOs, remove the TODO markers in the reflection.md
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    - description: Delete the 'Add Your Name Here' prompt in the reflection file
+      check: MatchFileFragment
+      options:
+        fragment: "Add Your Name Here"
+        count: 0
+        exact: true
+
+# run the program and confirm the existence of fragments in its output
+- description: 'Add --desc option'
+  check: MatchCommandFragment
+  options:
+    command: 'python sort_solution.py --desc 23 4 15'
+    fragment: [23, 15, 4]
+    count: 1
+    exact: true
+
+- description: 'Add --max option'
+  check: MatchCommandFragment
+  options:
+    command: 'python sort_solution.py 15 23 4 --max 16'
+    fragment: [4, 15]
+    count: 1
+    exact: true
+
+- description: 'Implement ability to run --desc and --max together'
+  check: MatchCommandFragment
+  options:
+    command: 'python sort_solution.py --desc 15 23 4 --max 16'
+    fragment: [15, 4]
+    count: 1
+    exact: true
+
+- description: 'Add specified help text for --desc option'
+  check: MatchCommandFragment
+  options:
+    command: 'python sort_solution.py --help'
+    fragment: Sort
+    count: 1
+    exact: false
+
+- description: 'Add specified help text for --max option'
+  check: MatchCommandFragment
+  options:
+    command: 'python sort_solution.py --help'
+    fragment: Exclude
+    count: 1
+    exact: false
+
+# count number of commits in the GitHub repository
+- description: Have at least a specific minimum number of commits (6) in repository
+  check: CountCommits
+  options:
+    count: 6

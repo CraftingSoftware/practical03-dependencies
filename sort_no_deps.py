@@ -58,5 +58,4 @@ if __name__ == "__main__":
     if max_value is not None:
         numbers = [number for number in numbers if number <= max_value]
 
-    for index, number in enumerate(numbers):
-        print(f"[{index}] {number}")
+    print(numbers)

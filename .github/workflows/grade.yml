@@ -1,5 +1,13 @@
-name: Grade
-on: [push, pull_request]
+name: grade
+
+# Controls when the action will run
+# Workflow begins with push or PR events
+# Focuses on the main branch only
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   markdown:
@@ -25,7 +33,7 @@ jobs:
         with:
           paths: "**/*.md"
           config: .github/cspell.json
-  gatorgrader:
+  gatorgrade:
     runs-on: ubuntu-latest
     name: Run GatorGrader
     steps:
@@ -33,9 +41,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Install Poetry
-        uses: abatilo/actions-poetry@v2.1.4
-        with:
-          poetry-version: 1.0.10
-      - name: Run GatorGradle
-        uses: GatorEducator/gatorgradle-action@v1
+      # Run GatorGrader: see config/gatorgrader.yml
+      - name: Run GatorGrader
+        if: always()
+        run:  |
+          pip install gatorgrade
+          gatorgrade --config config/gatorgrade.yml

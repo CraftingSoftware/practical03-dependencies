@@ -16,10 +16,12 @@
         "gitignore",
         "github",
         "gatorgrader",
+        "gatorgrade",
         "gatoreducator",
         "mkdir",
         "checkmark",
-        "checkmarks"
+        "checkmarks",
+        "gradebook"
     ],
     "ignorePaths": [
         ".github/**"
