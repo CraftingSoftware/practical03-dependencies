@@ -1,7 +1,5 @@
 # Practical 03: Fighting Software Complexity by Using Dependencies and How Poetry Makes It Easy
 
-## Due Date: October 21st, 2022 by midnight
-
 ## Introduction
 
 In this practical assignment, you will extend a sorting program, `sort.py`, using a dependency called [Typer](https://typer.tiangolo.com/) to improve its command-line interface. Through this process, you will learn how to manage dependencies using [Poetry](https://python-poetry.org/), a dependency management tool for Python.Through this exercise, you will put into practice the following learning objective(s):
